@@ -1,5 +1,20 @@
+require 'pry'
+
 def consolidate_cart(cart)
-  # code here
+  new_cart = {}
+    cart.each do |items, array|
+      items.each do |veg, veg_attr|
+        veg.uniq
+      #  if items
+        binding.pry
+    #  new_cart << items
+        #new_cart << array
+
+
+      #if new_cart[count].nil?
+
+    end
+    end
 end
 
 def apply_coupons(cart, coupons)
