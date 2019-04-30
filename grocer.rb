@@ -1,24 +1,5 @@
 require 'pry'
 
-# def consolidate_cart(cart)
-#   new_cart = {}
-#     cart.each do |items, array|
-#       items.each do |veg, veg_attr|
-#         veg.uniq
-#       #  if items
-#     #  new_cart << items
-#         #new_cart << array
-#
-#
-#       #if new_cart[count].nil?
-#       #  {} << count
-#
-#       end
-#     end
-#   new_cart.flatten
-# end
-
-
 def consolidate_cart(cart)
   new_cart = {}
   count = 0 #setting a count value bc you need to count and increment to it.
@@ -32,35 +13,6 @@ def consolidate_cart(cart)
   return new_cart #call the new cart
 end
 
- # def apply_coupons(cart, coupons)
- #     cart.hash = {}
- #      coupon_price = 0
- #        count_number = 0
- #
- # end
-
- # def apply_coupons(cart, coupons)
- #   coupons.each do |coupon_hash|
- #
- #     fruit_name = coupon_hash[:item]
- #     new_coupon_hash = {
- #       :price => coupon_hash[:cost],
- #       :clearance => "true",
- #       :count => coupon_hash[:num]
- #     }
- #
- #      if cart.key?(fruit_name)
- #       new_coupon_hash[:clearance] = cart[fruit_name][:clearance]
- #       if cart[fruit_name][:count]>= new_coupon_hash[:count]
- #         new_coupon_hash[:count] = (cart[fruit_name][:count]/new_coupon_hash[:count]).floor
- #         cart[fruit_name][:count] = (coupon_hash[:num])%(cart[fruit_name][:count])
- #       end
- #       cart[fruit_name + " W/COUPON"] = new_coupon_hash
- #        binding.pry
- #     end
- #     end
- #   return cart
- # end
 
  def apply_coupons(cart, coupons)
    coupons.each do |coupon| #iterating through the coupon for avocados
@@ -70,7 +22,7 @@ end
        if cart["#{name} W/COUPON"] #calling the cart with interpolating name var[coupon[:item]] -- set to that = {:count=>1, :price=>5.0, :clearance=>true}
          cart["#{name} W/COUPON"][:count] += 1  #calling cart[name var which is with coupon so thats why we're calling it]
          #with the count key incrementing by 1 bc amount of items is changing  = 2
-         #purp: to apply multple coupons
+         #purpose: to apply multple coupons
        else
          cart["#{name} W/COUPON"] = {:count => 1, :price => coupon[:cost]}  #else setting cart[with item+coupon] equal to hash with keys set to values
                                   #{not incrementing count and setting to 1, setting price to  coupon with cost key} (coupon = {:item=>"AVOCADO", :num=>2, :cost=>5.0})
@@ -86,15 +38,37 @@ end
 
 
 
-
-
-
-
 def apply_clearance(cart)
-  # code here
+  cart.each do |grocery, hash| #grocery is Avocado:, cheese: / hash is the array that follows
+    if hash[:clearance] #calling in the hash with clearance key directly
+      new_price = hash[:price] * 0.80 #setting a var new_price = hash[calling price key] * .80
+      #mult. by .80 & not .20 bc 20% of the original price is + subtract that amount from the original price
+      #you can times by .80 bc 80% of the product og price is same as product's full price with a 20% discount.
+      #if you wrote .20 -- it would return 20% of og price, what you want to rreturn is the price but 20% less
+        hash[:price] = new_price.round(2)  #[] undefined so you have to call the price from outta the hash and then set it to what you want it to return
+         #rounding the price to 2 decimal places bc it's money
+        #ex) 1.2345.round(2) = 1.23
+        # .round is rounding the number to the nearest decimal place
+      end
+    end
+  cart
+end
+
+# :price
+# change :price to 50
+def method_name(hash)
+   array[]
 end
 
 
 def checkout(cart, coupons)
-  # code here
-end
+   consolidated_cart = consolidate_cart(cart)
+      couponed_cart = apply_coupons(consolidate_cart, coupons)
+        final_cart = apply_clearance(couponed_cart)
+          cart_total = 0
+            final_cart.each do |item, properties|
+                cart_total += properties[:price] * properties[:count]
+                    cart_total = [:price] * 0.80 > 100
+
+            end
+          end
