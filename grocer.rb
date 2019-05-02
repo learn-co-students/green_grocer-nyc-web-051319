@@ -55,20 +55,21 @@ def apply_clearance(cart)
 end
 
 # :price
-# change :price to 50
-def method_name(hash)
-   array[]
-end
+# # change :price to 50
+# def method_name(hash)
+#    array[]
+# end
 
 
-def checkout(cart, coupons)
-   consolidated_cart = consolidate_cart(cart)
-      couponed_cart = apply_coupons(consolidate_cart, coupons)
-        final_cart = apply_clearance(couponed_cart)
+def checkout(cart, coupons) #must use whats called in arg.
+   consolidated_cart = consolidate_cart(cart) #calling method with it's argument, c_c(cart), also bc we're calling it wihtin this arg.
+      couponed_cart = apply_coupons(consolidated_cart, coupons) # consolidate_cart(cart) bc it's included & as a placeholder  #^ same reasoning.
+        final_cart = apply_clearance(couponed_cart) #finalcart calling apply_clearance method.
           cart_total = 0
             final_cart.each do |item, properties|
-                cart_total += properties[:price] * properties[:count]
-                    cart_total = [:price] * 0.80 > 100
-
-            end
+                cart_total += properties[:price] * properties[:count] #mult. price with count of properties in cart
+              end
+                  #10% 100> #should just be cart_total bc thats what we're apply disc. to & not [:price]
+                  cart_total = cart_total * 0.90 if cart_total > 100
+                    cart_total
           end
